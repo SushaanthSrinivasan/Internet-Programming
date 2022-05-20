@@ -1,0 +1,214 @@
+<html>
+
+<head>
+    <Title>
+        Train Brain
+    </Title>
+    <link rel="timer" href="timer.css">
+    <script src="timer.js"></script>
+
+</head>
+<style>
+    body {
+        background-image: url("bg.jpg");
+        font-family: Poppins;
+        font-size: xx-large;
+        text-decoration: wavy;
+        text-shadow: 2px 2px red;
+        vertical-align: middle;
+        color: rgb(250, 237, 4);
+    }
+
+    table,
+    th,
+    td {
+        table-layout: fixed;
+        margin-left: auto;
+        margin-right: auto;
+        border: 2px solid white;
+        font-family: Arial, Helvetica, sans-serif;
+        text-decoration: solid;
+        font-size: x-large;
+        color: white;
+        text-shadow: none;
+    }
+</style>
+
+<body onload="timer()">
+
+    <a href="index.html">
+        <img src="home.png" height="50px" width="50px"></a>
+
+    <h2
+        style="text-shadow:white;text-align: center; color: rgb(255, 196, 0); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+        Start Playing
+    </h2>
+    <table style="text-align: center;width: 100%;background-color: black;">
+        <tr>
+            <th> Score is: <span id="score">0</span></th>
+            <th id="demo">
+                Timer
+            </th>
+        </tr>
+    </table>
+    <h2 style="text-align: center;">
+        <table>
+            <tr>
+                <td> <img id="1" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id);"></td>
+                <td> <img id="2" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td> <img id="3" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td><img id="4" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td><img id="5" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td><img id="6" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+            </tr>
+            <tr>
+                <td><img id="7" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td><img id="8" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td><img id="9" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id);"></td>
+                <td><img id="10" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td><img id="11" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td><img id="12" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+            </tr>
+            <tr>
+                <td> <img id="13" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td> <img id="14" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td> <img id="15" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td> <img id="16" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td> <img id="17" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id);"></td>
+                <td> <img id="18" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+            </tr>
+            <tr>
+                <td> <img id="19" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td> <img id="20" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td> <img id="21" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td> <img id="22" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td> <img id="23" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+                <td> <img id="24" src="card_bs.jpg" height="150px" width="120px" onclick="turn(this.id)"></td>
+            </tr>
+        </table>
+    </h2>
+
+
+    <script>
+        var img = ["bb.jpg", "fb.jpg", "bouncy.png", "golf.jpg", "blue.jpg", "cb.jpg", "cricket ball.jpg", "jb.webp", "mb.webp", "ppb.jpeg", "rb.jpg", "tb.jpg"];
+        let array = new Array(24).fill(-1);
+        var count = 0;
+        var i = 0;
+        var j = 0;
+        var n = 0;
+        var x;
+        var score = 0;
+        var count = 0;
+        var minutes;
+        var seconds;
+        function ass() {
+            var i = 0;
+            var j = 0;
+
+            for (i = 0; i < 24; i++) {
+
+                value = Math.floor((Math.random() * 12));
+                n = 0;
+                for (j = 0; j < 24; j++) {
+                    if (array[j] == value) {
+                        n++;
+                    }
+                }
+                if (n < 2)
+                    array[i] = value;
+                else
+                    i--;
+
+            }
+
+        }
+        function turn(y) {
+
+            var path = document.getElementById(y).src;
+            document.getElementById(y).style.transitionDuration = '1s';
+            if (path.localeCompare("file:///C:/Users/Sushaanth/Desktop/ex3/card_bs.jpg") == 0) {
+                document.getElementById(y).src = img[array[y - 1]];
+                count++;
+                x = y;
+            }
+            checker();
+        }
+        function checker() {
+            if (count == 2) {
+                for (i = 0; i < 24; i++) {
+                    if (i == x - 1) {
+                        i++;
+                    }
+
+                    if (array[x - 1] == array[i] && (document.getElementById(i + 1).src.localeCompare("file:///C:/Users/Sushaanth/Desktop/ex3/card_bs.jpg") != 0)) {
+
+                        document.getElementById(x).style.opacity = '0';
+                        document.getElementById(i + 1).style.opacity = '0';
+                        score++;
+
+                        if (score == 12) {
+                            document.body.style = "text-align: center;font-size: 50px;color: white";
+                            document.body.innerHTML = '<br><br>You Won!!<br><br>Score: ' + score + '<br> Time Left: ' + minutes + ':' + seconds + '<br><br><a href = "mg.html">Play again<br><br> <a href="index.html"><img src="home.png" height="50px" width="50px"></a>';
+                            break;
+                        }
+                        document.getElementById("score").innerHTML = score;
+                        break;
+                    }
+
+                }
+            }
+
+
+            if (count == 3) {
+                for (i = 0; i < 24; i++) {
+
+                    if (document.getElementById(i + 1).src.localeCompare("file:///C:/Users/Sushaanth/Desktop/ex3/card_bs.jpg") != 0 && (i != x - 1)) {
+                        document.getElementById(i + 1).src = "file:///C:/Users/Sushaanth/Desktop/ex3/card_bs.jpg";
+                        count -= 1;
+                    }
+                }
+            }
+
+        }
+
+        function timer() {
+            ass();
+
+            let level = prompt("Easy: 0 | Medium: 1 | Hard: 2 | Impossible: 3");
+            var lev = [600100, 300100, 60100, 40100];
+            level = parseInt(level);
+            if (!Number.isInteger(level)) {
+                window.open("mg.html", "_parent");
+            }
+            var countDownDate = new Date().getTime() + lev[level];
+            // 30100 -> 30 secs, 60100 -> 1 min, 300100 -> 5 mins, 600100 -> 10 mins
+
+            var x = setInterval(function () {
+
+
+                var now = new Date().getTime();
+
+
+                var distance = countDownDate - now;
+
+
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+                document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
+
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.body.style = "text-align: center;font-size: 50px;color: white";
+                    document.body.innerHTML = '<br><br>Time Out!!<br><br>Score: ' + score + '<br><br><a href = "mg.html">Play again?<br><br><a href="index.html"><img src="home.png" height="50px" width="50px"></a>';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

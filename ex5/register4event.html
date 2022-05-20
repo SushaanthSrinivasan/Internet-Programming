@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    var listDepartments = ['CSE','IT','MECH','CHEM','CIVIL','EEE'];
+    function changeBorder(element) {
+        element.style.border="solid black";
+        element.style.background="gray";
+        element.style.color="white";
+    }
+    function showWarning(element) {
+        if(element.value.length > 10 || element.value.length < 10) {
+            element.style.border="black solid 1px" ;
+            element.style.background="yellow";
+        }
+        else {
+            element.style.background="white" ;
+            element.style.color="black";
+        }
+    }
+    function reverseChange(element) {
+        element.style.border="solid white";
+        element.style.background="white";
+        element.style.color="blue";
+    }
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      var STR=document.getElementById(data).innerHTML;
+      ev.target.value+=STR+";";
+    }
+
+    function tabulate() {
+        var myForm = document.getElementById('warship') ;
+        let formData = new FormData(myForm);
+        document.write('<link rel="stylesheet" href="style.css"><style>table, th, td{ border: 1px solid gray ; }</style>')
+        document.writeln("<h1>FORM RESPONSE RECEIVED</h1>");
+        document.writeln("<div class='box' style='width: fit-content;'><table style='width: 400px;margin:10px;font-size:25px;'>");
+        document.writeln("<tr><th>Name</th><td>"+formData.get('name')+"</td></tr><tr><th>College Name</th><td>"+formData.get('college')+"</td></tr><tr><th>College Address</th><td>"+formData.get('address')+"</td></tr><tr><th>Pincode</th><td>"+formData.get('pincode')+"</td></tr><tr><th>Age</th><td>"+formData.get('age')+"</td></tr><tr><th>DOB</th><td>"+formData.get('DOB')+"</td></tr><tr><th>Gender</th><td>"+formData.get('gender')+"</td></tr><tr><th>Department</th><td>"+formData.get('department')+"</td></tr><tr><th>Contact Number</th><td>"+formData.get('mobile')+"</td></tr><tr><th>Email</th><td>"+formData.get('email')+"</td></tr><tr><th>Programming skills</th><td>"+formData.get('prog')+"</td></tr><tr><th>Hobbies</th><td>"+formData.getAll('hobbies')+"</td></tr></table></div>") ;
+    }
+    </script>
+</head>
+<body style="color: #00ff00;">
+    <div class="box">
+    <h1>WORKSHIP REGISTRATION FORM</h1>
+    <p style='font-style:italic;text-align:center;'>Accepts responses until 24th April 2022</p>   
+    <form id="warship" method="get" action="http://localhost:8080/SQLpgm/In2">
+        <label style="margin-top:10px; margin-left: 10px;" for="name">Enter Name* </label>
+        <input type="text" id="name" name="name" onfocus="changeBorder(this)" onblur="reverseChange(this)" required/><br /> 
+        <label for="college" style="margin-left: 10px;">College Name* </label>
+        <input id="college" name="college" type="text" pattern="[a-zA-Z]+" oninvalid="alert('Enter Valid College name')" required/><br /> 
+        <label for="address" style="margin-left: 10px;">College Address</label>
+        <input type="text" name="address" pattern="[0-9a-zA-Z]+" onselect="alert('Enter the college address')"/><br />
+        <label for="pincode" style="margin-left: 10px;">Pincode</label>
+        <input type="text" name="pincode" pattern="[0-9]{1,6}" oninvalid="alert('Pincode not valid')"/><br />             
+        <label for="age" style="margin-left: 10px;">Age</label>
+        <input type="number" name="age" pattern="[0-9]+" onkeypress="alert('enter age')"/><br />
+        <label for="dob" style="margin-left: 10px;">DOB*</label>
+        <input type="date" name='DOB' id="DOB" required/><br />
+        <label for="gender" style="margin-left: 10px;">Gender*</label>
+        <input type="radio" value="male" id="male" name="gender" placeholder="gender" required oninvalid="alert('Enter gender')" />
+        <label for="male">Male</label>
+        <input type="radio" name="gender" id="female" value="female" placeholder="gender" />
+        <label for="female">Female</label>
+        <input type="radio" name="gender"  id="other" value="other" placeholder="gender"/>
+        <label for="other">Other</label><br />
+
+        <label for="department" style="margin-left: 10px;">Department</label>
+        <select id="department" name="department" onchange="alert('Your chosen department is '+this.value)" required>
+            <option value="CSE">CSE</option>
+            <option value="IT">IT</option>
+            <option value="MECH">MECH</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="BME">BME</option>
+        </select><br />
+        <label for="mobile" style="margin-left: 10px;">Mobile*</label>
+        <input id="mobile" name="mobile" type="text" onchange="showWarning(this)" oninvalid="alert('Enter a valid mobile number')" required/><br />
+        <label for="email" style="margin-left: 10px;">Email*</label>
+        <input type="email" name="email" id="email" pattern=".+@.+\..+" required/><br />
+        <label for="progskills" style="margin-left: 10px;">Programming skills</label>
+        <input type="text" name="prog" id="progskills" ondrop="drop(event)" ondragover="allowDrop(event)" /><br />
+        <ul>
+            <li class="draglist" ID="id1" draggable="true" ondragstart="drag(event)">Java</li>
+            <li class="draglist" ID="id2" draggable="true" ondragstart="drag(event)">Python</li>
+            <li class="draglist" ID="id3" draggable="true" ondragstart="drag(event)">C/C++</li>
+            <li class="draglist" ID="id4" draggable="true" ondragstart="drag(event)">MySQL</li>
+        </ul>
+        <label for="hobbies" style="margin-left: 10px;">Hobbies</label><br />
+        <input id="dance" type="checkbox" value="dancing" name="hobbies"/>
+        <label for="dance" style="margin-left: 10px;">Dancing</label><br />
+        <input id="singing" type="checkbox" value="singing" name="hobbies" />
+        <label for="singing" style="margin-left: 10px;">Singing</label><br />
+        <input id="sports" type="checkbox" value="sports" name="hobbies"/>
+        <label for="sports" style="margin-left: 10px;">Playing Sports</label><br />
+        <label for="myFile" style="margin-top: 50px; margin-left: 10px;">Consent Letter</label>
+        <input type="file" id="myFile" name="filename">
+        <br />
+        <input type="submit" value="Submit">
+        <input type="reset"/>
+    </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+create database test;
+use test;
+
+create table CRED (
+	uname varchar(20),
+	password varchar(20)
+);
+
+insert into cred values ('user1', '1234');
+
+create table userdet (
+	name varchar(20),
+	college varchar(20),
+	address varchar(20),
+	age varchar(20),
+	DOB varchar(20),
+	gender varchar(20),
+	department varchar(20),
+	mobile varchar(20),
+	email varchar(20),
+	prog varchar(20)
+);
+
+create table quiz (
+	qn varchar(50),
+	opt varchar(50),
+	ans varchar(50)
+);
+
+insert into quiz values ('Python is a ___ ?', 'Snake,ProgrammingLanguage', 'ProgrammingLanguage');
+insert into quiz values ('Java is a ___ ?', 'CoffeeDrink,ProgrammingLanguage', 'ProgrammingLanguage');
+
+
+create table SCOREDETAILS (
+	stname varchar(20),
+	stscore varchar(5)
+);
+
+insert into scoredetails values ("user1", "2");
+
+create table ADMINCRED (
+	uname varchar(20),
+	password varchar(20)
+);
+
+insert into admincred values ("admin", "root");
+
+
+create table visits (
+	visits int
+);
